@@ -25,7 +25,6 @@ enum ButtonScenarioSnapshotTestsDeprecated: String, CaseIterable {
     case test5
     case test6
     case test7
-    case test8
 
     // MARK: - Type Alias
 
@@ -49,8 +48,6 @@ enum ButtonScenarioSnapshotTestsDeprecated: String, CaseIterable {
             return self.test6(isSwiftUIComponent: isSwiftUIComponent)
         case .test7:
             return self.test7()
-        case .test8:
-            return self.test8()
         }
     }
 
@@ -246,22 +243,6 @@ enum ButtonScenarioSnapshotTestsDeprecated: String, CaseIterable {
                     shape: shape,
                     sizes: Constants.Sizes.all
                 )
-        }
-    }
-
-    /// Test 8
-    ///
-    /// Description: To test all rebrandingFeatureToggle
-    ///
-    private func test8() -> [ButtonConfigurationSnapshotTestsDeprecated] {
-        let rebrandingFeatureToggles = Bool.allCases
-
-        return rebrandingFeatureToggles.compactMap { rebrandingFeatureToggle -> ButtonConfigurationSnapshotTestsDeprecated? in
-            return .init(
-                scenario: self,
-                shape: .rounded,
-                rebrandingFeatureToggle: rebrandingFeatureToggle
-            )
         }
     }
 }

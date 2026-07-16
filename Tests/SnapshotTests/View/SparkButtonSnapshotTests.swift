@@ -32,10 +32,6 @@ final class SparkButtonSnapshotTests: SwiftUIComponentSnapshotTestCase {
 
             for configuration in configurations {
 
-                let service = SparkFeatureToggleServicingGeneratedMock()
-                service.rebranding = configuration.rebrandingFeatureToggle
-                SparkFeatureToggleService.shared = service
-
                 let view = self.component(configuration: configuration)
                     .sparkTheme(self.theme)
                     .sparkButtonIntent(configuration.intent)

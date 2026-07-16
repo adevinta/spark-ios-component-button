@@ -26,7 +26,7 @@ final class ButtonGetBorderUseCaseDeprecatedTests: XCTestCase {
             givenShape: .rounded,
             givenVariant: .contrast,
             expectedWidth: 0,
-            expectedRadius: self.borderMock.radius.large
+            expectedRadius: self.borderMock.radius.full
         )
     }
 
@@ -35,7 +35,7 @@ final class ButtonGetBorderUseCaseDeprecatedTests: XCTestCase {
             givenShape: .rounded,
             givenVariant: .filled,
             expectedWidth: 0,
-            expectedRadius: self.borderMock.radius.large
+            expectedRadius: self.borderMock.radius.full
         )
     }
 
@@ -44,7 +44,7 @@ final class ButtonGetBorderUseCaseDeprecatedTests: XCTestCase {
             givenShape: .rounded,
             givenVariant: .ghost,
             expectedWidth: 0,
-            expectedRadius: self.borderMock.radius.large
+            expectedRadius: self.borderMock.radius.full
         )
     }
 
@@ -53,7 +53,7 @@ final class ButtonGetBorderUseCaseDeprecatedTests: XCTestCase {
             givenShape: .rounded,
             givenVariant: .outlined,
             expectedWidth: self.borderMock.width.small,
-            expectedRadius: self.borderMock.radius.large
+            expectedRadius: self.borderMock.radius.full
         )
     }
 
@@ -62,72 +62,13 @@ final class ButtonGetBorderUseCaseDeprecatedTests: XCTestCase {
             givenShape: .rounded,
             givenVariant: .tinted,
             expectedWidth: 0,
-            expectedRadius: self.borderMock.radius.large
+            expectedRadius: self.borderMock.radius.full
         )
     }
 
     // MARK: - Tests Shape cases
 
-    func test_execute_radius_when_shape_is_square_case() {
-        self.testExecute(
-            givenShape: .square,
-            givenVariant: .filled,
-            expectedWidth: 0,
-            expectedRadius: 0
-        )
-    }
-
-    func test_execute_radius_when_shape_is_rounded_case() {
-        self.testExecute(
-            givenShape: .rounded,
-            givenVariant: .filled,
-            expectedWidth: 0,
-            expectedRadius: self.borderMock.radius.large
-        )
-    }
-
-    func test_execute_radius_when_shape_is_pill_case() {
-        self.testExecute(
-            givenShape: .pill,
-            givenVariant: .filled,
-            expectedWidth: 0,
-            expectedRadius: self.borderMock.radius.full
-        )
-    }
-
-    // MARK: - Tests RemoveShapeFeatureToggle
-
-    func test_execute_radius_when_rebrandingFeatureToggle_is_true_with_square_shape() {
-        self.testExecute(
-            givenShape: .square,
-            givenVariant: .filled,
-            givenRebrandingFeatureToggle: true,
-            expectedWidth: 0,
-            expectedRadius: self.borderMock.radius.full
-        )
-    }
-
-    func test_execute_radius_when_rebrandingFeatureToggle_is_true_with_rounded_shape() {
-        self.testExecute(
-            givenShape: .rounded,
-            givenVariant: .filled,
-            givenRebrandingFeatureToggle: true,
-            expectedWidth: 0,
-            expectedRadius: self.borderMock.radius.full
-        )
-    }
-
-    func test_execute_radius_when_rebrandingFeatureToggle_is_true_with_pill_shape() {
-        self.testExecute(
-            givenShape: .pill,
-            givenVariant: .filled,
-            givenRebrandingFeatureToggle: true,
-            expectedWidth: 0,
-            expectedRadius: self.borderMock.radius.full
-        )
-    }
-
-    func test_execute_radius_when_rebrandingFeatureToggle_is_false_respects_all_shapes() {
+    func test_execute_all_shapes_return_full_radius() {
         // GIVEN
         let useCase = ButtonGetBorderUseCaseDeprecated()
 
@@ -151,9 +92,12 @@ final class ButtonGetBorderUseCaseDeprecatedTests: XCTestCase {
         )
 
         // THEN
-        XCTAssertEqual(borderSquare.radius, 0, "Wrong radius for square shape")
-        XCTAssertEqual(borderRounded.radius, self.borderMock.radius.large, "Wrong radius for rounded shape")
+        XCTAssertEqual(borderSquare.radius, self.borderMock.radius.full, "Wrong radius for square shape")
+        XCTAssertEqual(borderRounded.radius, self.borderMock.radius.full, "Wrong radius for rounded shape")
         XCTAssertEqual(borderPill.radius, self.borderMock.radius.full, "Wrong radius for pill shape")
+        XCTAssertEqual(borderSquare.width, 0)
+        XCTAssertEqual(borderRounded.width, 0)
+        XCTAssertEqual(borderPill.width, 0)
     }
 
     // MARK: - Tests Combined scenarios
@@ -163,7 +107,7 @@ final class ButtonGetBorderUseCaseDeprecatedTests: XCTestCase {
             givenShape: .rounded,
             givenVariant: .outlined,
             expectedWidth: self.borderMock.width.small,
-            expectedRadius: self.borderMock.radius.large
+            expectedRadius: self.borderMock.radius.full
         )
     }
 
@@ -172,11 +116,11 @@ final class ButtonGetBorderUseCaseDeprecatedTests: XCTestCase {
             givenShape: .square,
             givenVariant: .outlined,
             expectedWidth: self.borderMock.width.small,
-            expectedRadius: 0
+            expectedRadius: self.borderMock.radius.full
         )
     }
 
-    func test_execute_with_outlined_variant_pill_shape_and_rebrandingFeatureToggle_true() {
+    func test_execute_with_outlined_variant_and_pill_shape() {
         self.testExecute(
             givenShape: .pill,
             givenVariant: .outlined,
@@ -193,19 +137,13 @@ private extension ButtonGetBorderUseCaseDeprecatedTests {
     func testExecute(
         givenShape: ButtonShape,
         givenVariant: ButtonVariant,
-        givenRebrandingFeatureToggle: Bool = false,
         expectedWidth: CGFloat,
         expectedRadius: CGFloat
     ) {
         // GIVEN
         let errorSuffixMessage = " for .\(givenShape) shape, .\(givenVariant) variant"
 
-        let featureToggleService = SparkFeatureToggleServicingGeneratedMock()
-        featureToggleService.rebranding = givenRebrandingFeatureToggle
-
-        let useCase = ButtonGetBorderUseCaseDeprecated(
-            featureTogglesService: featureToggleService
-        )
+        let useCase = ButtonGetBorderUseCaseDeprecated()
 
         // WHEN
         let border = useCase.execute(

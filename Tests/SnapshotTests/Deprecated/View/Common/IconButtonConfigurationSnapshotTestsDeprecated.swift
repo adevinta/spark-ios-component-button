@@ -34,8 +34,6 @@ struct IconButtonConfigurationSnapshotTestsDeprecated {
     let image: ImageEither
     let state: ControlState
 
-    let rebrandingFeatureToggle: Bool
-
     let modes: [ComponentSnapshotTestMode]
     let sizes: [UIContentSizeCategory]
 
@@ -49,7 +47,6 @@ struct IconButtonConfigurationSnapshotTestsDeprecated {
         variant: ButtonVariant = .filled,
         image: ImageEither,
         state: ControlState = .normal,
-        rebrandingFeatureToggle: Bool = false,
         modes: [ComponentSnapshotTestMode] = Constants.Modes.default,
         sizes: [UIContentSizeCategory] = Constants.Sizes.default
     ) {
@@ -60,7 +57,6 @@ struct IconButtonConfigurationSnapshotTestsDeprecated {
         self.variant = variant
         self.image = image
         self.state = state
-        self.rebrandingFeatureToggle = rebrandingFeatureToggle
         self.modes = modes
         self.sizes = sizes
     }
@@ -75,8 +71,7 @@ struct IconButtonConfigurationSnapshotTestsDeprecated {
             "\(self.size)" + "Size",
             "\(self.variant)" + "Variant",
             "\(self.state)" + "State",
-            "\(self.state)" + "State",
-            self.rebrandingFeatureToggle ? "rebrandingFeatureToggle" : nil
+            "\(self.state)" + "State"
         ].compactMap { $0 }.joined(separator: "-")
     }
 }
