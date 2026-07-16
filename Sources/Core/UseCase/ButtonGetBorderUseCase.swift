@@ -23,16 +23,6 @@ protocol ButtonGetBorderUseCaseable {
 
 struct ButtonGetBorderUseCase: ButtonGetBorderUseCaseable {
 
-    // MARK: - Properties
-
-    private let featureTogglesService: any SparkFeatureToggleServicing
-
-    // MARK: - Initialization
-
-    init(featureTogglesService: any SparkFeatureToggleServicing = SparkFeatureToggleService.shared) {
-        self.featureTogglesService = featureTogglesService
-    }
-
     // MARK: - Methods
 
     func execute(
@@ -47,15 +37,9 @@ struct ButtonGetBorderUseCase: ButtonGetBorderUseCaseable {
 
         let border = theme.border
 
-        let radius: CGFloat = switch shape {
-        case .square: 0
-        case .rounded: border.radius.large
-        case .pill: border.radius.full
-        }
-
         return .init(
             width: (variant == .outlined) ? border.width.small : 0,
-            radius: self.featureTogglesService.rebranding ? border.radius.full : radius
+            radius: border.radius.full
         )
     }
 }

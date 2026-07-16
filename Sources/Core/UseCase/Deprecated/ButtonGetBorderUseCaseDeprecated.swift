@@ -22,16 +22,6 @@ protocol ButtonGetBorderUseCaseableDeprecated {
 
 struct ButtonGetBorderUseCaseDeprecated: ButtonGetBorderUseCaseableDeprecated {
 
-    // MARK: - Properties
-
-    private let featureTogglesService: any SparkFeatureToggleServicing
-
-    // MARK: - Initialization
-
-    init(featureTogglesService: any SparkFeatureToggleServicing = SparkFeatureToggleService.shared) {
-        self.featureTogglesService = featureTogglesService
-    }
-
     // MARK: - Methods
 
     func execute(
@@ -39,17 +29,11 @@ struct ButtonGetBorderUseCaseDeprecated: ButtonGetBorderUseCaseableDeprecated {
         shape: ButtonShape,
         variant: ButtonVariant
     ) -> ButtonBorder {
-        let radius: CGFloat = switch shape {
-        case .square: 0
-        case .rounded: border.radius.large
-        case .pill: border.radius.full
-        }
-
         let width = (variant == .outlined) ? border.width.small : 0
 
         return .init(
             width: width,
-            radius: self.featureTogglesService.rebranding ? border.radius.full : radius
+            radius: border.radius.full
         )
     }
 }

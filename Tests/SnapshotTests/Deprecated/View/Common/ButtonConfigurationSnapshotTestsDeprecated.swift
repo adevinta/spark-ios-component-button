@@ -34,8 +34,6 @@ struct ButtonConfigurationSnapshotTestsDeprecated {
     let content: ButtonContentTypeDeprecated
     let state: ControlState
 
-    let rebrandingFeatureToggle: Bool
-
     let modes: [ComponentSnapshotTestMode]
     let sizes: [UIContentSizeCategory]
 
@@ -50,7 +48,6 @@ struct ButtonConfigurationSnapshotTestsDeprecated {
         variant: ButtonVariant = .filled,
         content: ButtonContentTypeDeprecated = .title("My Title"),
         state: ControlState = .normal,
-        rebrandingFeatureToggle: Bool = false,
         modes: [ComponentSnapshotTestMode] = Constants.Modes.default,
         sizes: [UIContentSizeCategory] = Constants.Sizes.default
     ) {
@@ -62,7 +59,6 @@ struct ButtonConfigurationSnapshotTestsDeprecated {
         self.variant = variant
         self.content = content
         self.state = state
-        self.rebrandingFeatureToggle = rebrandingFeatureToggle
         self.modes = modes
         self.sizes = sizes
     }
@@ -78,8 +74,7 @@ struct ButtonConfigurationSnapshotTestsDeprecated {
             "\(self.size)" + "Size",
             "\(self.variant)" + "Variant",
             "\(self.content.name)" + "Content",
-            "\(self.state)" + "State",
-            self.rebrandingFeatureToggle ? "rebrandingFeatureToggle" : nil
+            "\(self.state)" + "State"
         ].compactMap { $0 }.joined(separator: "-")
     }
 }

@@ -37,10 +37,6 @@ final class IconButtonUIViewSnapshotTestsDeprecated: UIKitComponentSnapshotTestC
             )
             for configuration in configurations {
 
-                let service = SparkFeatureToggleServicingGeneratedMock()
-                service.rebranding = configuration.rebrandingFeatureToggle
-                SparkFeatureToggleService.shared = service
-
                 let view: IconButtonUIView = .init(
                     theme: self.theme,
                     intent: configuration.intent,

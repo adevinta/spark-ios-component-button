@@ -23,7 +23,6 @@ enum IconButtonScenarioSnapshotTestsDeprecated: String, CaseIterable {
     case test3
     case test4
     case test5
-    case test6
 
     // MARK: - Type Alias
 
@@ -43,8 +42,6 @@ enum IconButtonScenarioSnapshotTestsDeprecated: String, CaseIterable {
             return self.test4(isSwiftUIComponent: isSwiftUIComponent)
         case .test5:
             return self.test5(isSwiftUIComponent: isSwiftUIComponent)
-        case .test6:
-            return self.test6(isSwiftUIComponent: isSwiftUIComponent)
         }
     }
 
@@ -208,30 +205,6 @@ enum IconButtonScenarioSnapshotTestsDeprecated: String, CaseIterable {
                 shape: shape,
                 image: image,
                 sizes: Constants.Sizes.all
-            )
-        }
-    }
-
-    /// Test 6
-    ///
-    /// Description: To test all rebrandingFeatureToggle
-    ///
-    private func test6(isSwiftUIComponent: Bool) -> [IconButtonConfigurationSnapshotTestsDeprecated] {
-        let rebrandingFeatureToggles = Bool.allCases
-
-        return rebrandingFeatureToggles.compactMap { rebrandingFeatureToggle -> IconButtonConfigurationSnapshotTestsDeprecated? in
-            guard let image = ImageEither.mock(
-                isSwiftUIComponent: isSwiftUIComponent,
-                for: .normal
-            ) else {
-                return nil
-            }
-
-            return .init(
-                scenario: self,
-                shape: .rounded,
-                image: image,
-                rebrandingFeatureToggle: rebrandingFeatureToggle
             )
         }
     }

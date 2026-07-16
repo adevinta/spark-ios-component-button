@@ -39,10 +39,6 @@ final class ButtonViewSnapshotTestsDeprecated: SwiftUIComponentSnapshotTestCase 
 
             for configuration in configurations {
 
-                let service = SparkFeatureToggleServicingGeneratedMock()
-                service.rebranding = configuration.rebrandingFeatureToggle
-                SparkFeatureToggleService.shared = service
-
                 let view = ButtonView(
                     theme: self.theme,
                     intent: configuration.intent,

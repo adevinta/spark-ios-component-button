@@ -26,7 +26,6 @@ enum ButtonScenarioSnapshotTests: String, CaseIterable {
     case test9
     case test10
     case test11
-    case test12
     case documentation
 
     // MARK: - Type Alias
@@ -65,8 +64,6 @@ enum ButtonScenarioSnapshotTests: String, CaseIterable {
             return self.test10()
         case .test11:
             return self.test11()
-        case .test12:
-            return self.test12()
         case .documentation:
             return self.documentation()
         }
@@ -334,22 +331,6 @@ enum ButtonScenarioSnapshotTests: String, CaseIterable {
                     shape: shape,
                     sizes: Constants.Sizes.all
                 )
-        }
-    }
-
-    /// Test 12
-    ///
-    /// Description: To test all rebrandingFeatureToggle
-    ///
-    private func test12() -> [ButtonConfigurationSnapshotTests] {
-        let rebrandingFeatureToggles = Bool.allCases
-
-        return rebrandingFeatureToggles.compactMap { rebrandingFeatureToggle -> ButtonConfigurationSnapshotTests? in
-            return .init(
-                scenario: self,
-                shape: .rounded,
-                rebrandingFeatureToggle: rebrandingFeatureToggle
-            )
         }
     }
 

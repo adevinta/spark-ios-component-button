@@ -28,7 +28,6 @@ struct ButtonConfigurationSnapshotTests {
     var removeStyles: Bool = false
     var isInfiniteWidth: Bool = false
     var isDisabled: Bool = false
-    var rebrandingFeatureToggle: Bool = false
 
     var modes: [ComponentSnapshotTestMode] = ComponentSnapshotTestConstants.Modes.default
     var sizes: [UIContentSizeCategory] = ComponentSnapshotTestConstants.Sizes.default
@@ -51,8 +50,7 @@ struct ButtonConfigurationSnapshotTests {
             "\(self.contentVisibility)" + "contentVisibility",
             self.removeStyles ? "withoutStyles" : nil,
             self.isInfiniteWidth ? "infiniteWidth" : nil,
-            self.isDisabled ? "disabled" : nil,
-            self.rebrandingFeatureToggle ? "rebrandingFeatureToggle" : nil
+            self.isDisabled ? "disabled" : nil
         ].compactMap { $0 }
 
         return parts
