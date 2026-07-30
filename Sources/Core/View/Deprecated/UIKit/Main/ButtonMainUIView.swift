@@ -171,6 +171,8 @@ public class ButtonMainUIView: UIControl {
 
     private var subscriptions = Set<AnyCancellable>()
 
+    private let visualIdentification = UUID().uuidString
+
     // MARK: - Initialization
 
     internal init(viewModel: ButtonMainViewModelDeprecated) {
@@ -189,9 +191,6 @@ public class ButtonMainUIView: UIControl {
     /// Setup the all needed data for this view and all subviews.
     /// This method is internal because it can be overriden by the view that inherits from this class.
     internal func setupView() {
-        // Identification
-        self.sparkVisualIdentification()
-
         // Accessibility
         self.accessibilityTraits = [.button]
         self.isAccessibilityElement = true
@@ -223,6 +222,7 @@ public class ButtonMainUIView: UIControl {
         super.layoutSubviews()
 
         self.updateBorder()
+        self.sparkVisualIdentification(id: self.visualIdentification)
     }
 
     // MARK: - Constraints
