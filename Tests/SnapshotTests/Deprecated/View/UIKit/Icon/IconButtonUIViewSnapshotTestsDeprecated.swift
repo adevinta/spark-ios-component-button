@@ -37,13 +37,7 @@ final class IconButtonUIViewSnapshotTestsDeprecated: UIKitComponentSnapshotTestC
             )
             for configuration in configurations {
 
-                let view: IconButtonUIView = .init(
-                    theme: self.theme,
-                    intent: configuration.intent,
-                    variant: configuration.variant,
-                    size: configuration.size,
-                    shape: configuration.shape
-                )
+                let view = self.component(configuration: configuration)
                 view.isHighlighted = configuration.state == .highlighted
                 view.isEnabled = configuration.state != .disabled
                 view.isSelected = configuration.state == .selected
@@ -57,6 +51,25 @@ final class IconButtonUIViewSnapshotTestsDeprecated: UIKitComponentSnapshotTestC
                     testName: configuration.testName()
                 )
             }
+        }
+    }
+
+    private func component(configuration: IconButtonConfigurationSnapshotTestsDeprecated) -> IconButtonUIView {
+        return if let appearance = configuration.appearance {
+            .init(
+                theme: self.theme,
+                appearance: appearance,
+                size: configuration.size,
+                shape: configuration.shape
+            )
+        } else {
+            .init(
+                theme: self.theme,
+                intent: configuration.intent,
+                variant: configuration.variant,
+                size: configuration.size,
+                shape: configuration.shape
+            )
         }
     }
 }

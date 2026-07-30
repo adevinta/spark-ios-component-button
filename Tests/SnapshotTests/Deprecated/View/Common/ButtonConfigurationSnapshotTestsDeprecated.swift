@@ -25,6 +25,7 @@ struct ButtonConfigurationSnapshotTestsDeprecated {
 
     let scenario: ButtonScenarioSnapshotTestsDeprecated
 
+    let appearance: ButtonAppearance?
     let intent: ButtonIntent
     let alignment: ButtonAlignment
     let shape: ButtonShape
@@ -41,6 +42,7 @@ struct ButtonConfigurationSnapshotTestsDeprecated {
 
     init(
         scenario: ButtonScenarioSnapshotTestsDeprecated,
+        appearance: ButtonAppearance? = nil,
         intent: ButtonIntent = .main,
         alignment: ButtonAlignment = .leadingImage,
         shape: ButtonShape = .default,
@@ -52,6 +54,7 @@ struct ButtonConfigurationSnapshotTestsDeprecated {
         sizes: [UIContentSizeCategory] = Constants.Sizes.default
     ) {
         self.scenario = scenario
+        self.appearance = appearance
         self.intent = intent
         self.alignment = alignment
         self.shape = shape
@@ -68,6 +71,7 @@ struct ButtonConfigurationSnapshotTestsDeprecated {
     func testName() -> String {
         return [
             "\(self.scenario.rawValue)",
+            self.appearance.map { "\($0)" + "Appearance" },
             "\(self.intent)",
             "\(self.alignment)" + "Alignment",
             "\(self.shape)" + "Shape",

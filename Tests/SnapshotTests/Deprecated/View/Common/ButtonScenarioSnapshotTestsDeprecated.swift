@@ -25,6 +25,7 @@ enum ButtonScenarioSnapshotTestsDeprecated: String, CaseIterable {
     case test5
     case test6
     case test7
+    case test8
 
     // MARK: - Type Alias
 
@@ -48,6 +49,8 @@ enum ButtonScenarioSnapshotTestsDeprecated: String, CaseIterable {
             return self.test6(isSwiftUIComponent: isSwiftUIComponent)
         case .test7:
             return self.test7()
+        case .test8:
+            return self.test8()
         }
     }
 
@@ -242,6 +245,32 @@ enum ButtonScenarioSnapshotTestsDeprecated: String, CaseIterable {
                     scenario: self,
                     shape: shape,
                     sizes: Constants.Sizes.all
+                )
+        }
+    }
+
+    /// Test 8
+    ///
+    /// Description: To test all appearances
+    ///
+    /// Content:
+    /// - **appearance: all**
+    /// - intent: default
+    /// - alignment: default
+    /// - size: default
+    /// - variant: default
+    /// - content: default
+    /// - state: default
+    /// - mode: all
+    /// - a11y: default
+    private func test8() -> [ButtonConfigurationSnapshotTestsDeprecated] {
+        let appearances = ButtonAppearance.allCases
+
+        return appearances.map { appearance -> ButtonConfigurationSnapshotTestsDeprecated in
+                .init(
+                    scenario: self,
+                    appearance: appearance,
+                    modes: Constants.Modes.all
                 )
         }
     }

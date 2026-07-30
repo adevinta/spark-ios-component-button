@@ -19,6 +19,7 @@ final class IconButtonSUIViewModelDeprecatedTests: XCTestCase {
         // GIVEN / WHEN
         let viewModel = IconButtonSUIViewModelDeprecated(
             theme: ThemeGeneratedMock.mocked(),
+            appearance: .default,
             intent: .main,
             variant: .filled,
             shape: .pill,

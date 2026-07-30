@@ -37,14 +37,7 @@ final class ButtonUIViewSnapshotTestsDeprecated: UIKitComponentSnapshotTestCase 
             )
             for configuration in configurations {
 
-                let view: ButtonUIView = .init(
-                    theme: self.theme,
-                    intent: configuration.intent,
-                    variant: configuration.variant,
-                    size: configuration.size,
-                    shape: configuration.shape,
-                    alignment: configuration.alignment
-                )
+                let view = self.component(configuration: configuration)
                 view.isHighlighted = configuration.state == .highlighted
                 view.isEnabled = configuration.state != .disabled
                 view.isSelected = configuration.state == .selected
@@ -73,6 +66,27 @@ final class ButtonUIViewSnapshotTestsDeprecated: UIKitComponentSnapshotTestCase 
                     testName: configuration.testName()
                 )
             }
+        }
+    }
+
+    private func component(configuration: ButtonConfigurationSnapshotTestsDeprecated) -> ButtonUIView {
+        return if let appearance = configuration.appearance {
+            .init(
+                theme: self.theme,
+                appearance: appearance,
+                size: configuration.size,
+                shape: configuration.shape,
+                alignment: configuration.alignment
+            )
+        } else {
+            .init(
+                theme: self.theme,
+                intent: configuration.intent,
+                variant: configuration.variant,
+                size: configuration.size,
+                shape: configuration.shape,
+                alignment: configuration.alignment
+            )
         }
     }
 }

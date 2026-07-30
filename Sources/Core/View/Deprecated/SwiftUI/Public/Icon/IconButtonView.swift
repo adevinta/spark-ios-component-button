@@ -26,6 +26,31 @@ public struct IconButtonView: View {
     /// Initialize a new button view.
     /// - Parameters:
     ///   - theme: The spark theme of the button.
+    ///   - appearance: The appearance of the button.
+    ///   - size: The size of the button.
+    ///   - shape: The shape of the button.
+    ///   - action: The action of the button.
+    public init(
+        theme: any Theme,
+        appearance: ButtonAppearance,
+        size: ButtonSize,
+        shape: ButtonShape,
+        action: @escaping () -> Void
+    ) {
+        self.init(
+            theme: theme,
+            appearance: appearance,
+            intent: .default,
+            variant: .default,
+            size: size,
+            shape: shape,
+            action: action
+        )
+    }
+
+    /// Initialize a new button view.
+    /// - Parameters:
+    ///   - theme: The spark theme of the button.
     ///   - intent: The intent of the button.
     ///   - variant: The variant of the button.
     ///   - size: The size of the button.
@@ -39,8 +64,29 @@ public struct IconButtonView: View {
         shape: ButtonShape,
         action: @escaping () -> Void
     ) {
+        self.init(
+            theme: theme,
+            appearance: nil,
+            intent: intent,
+            variant: variant,
+            size: size,
+            shape: shape,
+            action: action
+        )
+    }
+
+    private init(
+        theme: any Theme,
+        appearance: ButtonAppearance? = nil,
+        intent: ButtonIntent = .default,
+        variant: ButtonVariant = .default,
+        size: ButtonSize,
+        shape: ButtonShape,
+        action: @escaping () -> Void
+    ) {
         let viewModel = IconButtonSUIViewModelDeprecated(
             theme: theme,
+            appearance: appearance,
             intent: intent,
             variant: variant,
             shape: shape,

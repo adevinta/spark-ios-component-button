@@ -39,14 +39,7 @@ final class IconButtonViewSnapshotTestsDeprecated: SwiftUIComponentSnapshotTestC
 
             for configuration in configurations {
 
-                let view = IconButtonView(
-                    theme: self.theme,
-                    intent: configuration.intent,
-                    variant: configuration.variant,
-                    size: configuration.size,
-                    shape: configuration.shape,
-                    action: {}
-                )
+                let view = self.component(configuration: configuration)
                     .disabled(configuration.state == .disabled)
                     .selected(configuration.state == .selected)
                     .image(configuration.image.rightValue, for: configuration.state)
@@ -59,6 +52,27 @@ final class IconButtonViewSnapshotTestsDeprecated: SwiftUIComponentSnapshotTestC
                     testName: configuration.testName()
                 )
             }
+        }
+    }
+
+    private func component(configuration: IconButtonConfigurationSnapshotTestsDeprecated) -> IconButtonView {
+        return if let appearance = configuration.appearance {
+            .init(
+                theme: self.theme,
+                appearance: appearance,
+                size: configuration.size,
+                shape: configuration.shape,
+                action: {}
+            )
+        } else {
+            .init(
+                theme: self.theme,
+                intent: configuration.intent,
+                variant: configuration.variant,
+                size: configuration.size,
+                shape: configuration.shape,
+                action: {}
+            )
         }
     }
 }

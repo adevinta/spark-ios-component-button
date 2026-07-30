@@ -17,6 +17,7 @@ class IconButtonViewModelDeprecated: ButtonMainViewModelDeprecated {
     init(
         for frameworkType: FrameworkType,
         theme: any Theme,
+        appearance: ButtonAppearance?, // TODO: Remove ASAP the optional
         intent: ButtonIntent,
         variant: ButtonVariant,
         shape: ButtonShape,
@@ -26,6 +27,7 @@ class IconButtonViewModelDeprecated: ButtonMainViewModelDeprecated {
             for: frameworkType,
             type: .iconButton,
             theme: theme,
+            appearance: appearance,
             intent: intent,
             variant: variant,
             shape: shape,

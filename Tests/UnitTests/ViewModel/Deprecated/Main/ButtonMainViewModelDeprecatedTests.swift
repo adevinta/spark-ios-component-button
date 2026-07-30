@@ -127,18 +127,17 @@ final class ButtonMainViewModelDeprecatedTests: XCTestCase {
 
         // **
         // Use Cases
-        ButtonGetBorderUseCaseableDeprecatedMockTest.XCTCallsCount(
+        ButtonGetBorderUseCaseableMockTest.XCTCallsCount(
             stub.getBorderUseCaseMock,
-            executeWithBorderAndShapeAndVariantNumberOfCalls: 0
+            executeWithThemeAndAppearanceAndIntentAndShapeAndVariantAndRemoveStylesNumberOfCalls: 0
         )
-        ButtonGetContextColorsUseCaseableDeprecatedMockTest.XCTCallsCount(
-            stub.getContextColorsUseCaseMock,
-            executeWithThemeAndIntentAndVariantNumberOfCalls: 0
-        )
-        ButtonGetColorsUseCaseableDeprecatedMockTest.XCTAssert(
+        ButtonGetColorsUseCaseableMockTest.XCTAssert(
             stub.getColorsUseCaseMock,
             expectedNumberOfCalls: !isAlreadyOnPressedState ? 1 : 0,
-            givenContextColors: stub.contextColorsMock,
+            givenTheme: stub.themeMock,
+            givenAppearance: nil,
+            givenIntent: stub.viewModel.intent,
+            givenVariant: stub.viewModel.variant,
             givenIsPressed: isPressedAction,
             expectedReturnValue: stub.colorsMock
         )
@@ -232,22 +231,17 @@ final class ButtonMainViewModelDeprecatedTests: XCTestCase {
 
         // **
         // Use Cases
-        ButtonGetBorderUseCaseableDeprecatedMockTest.XCTCallsCount(
+        ButtonGetBorderUseCaseableMockTest.XCTCallsCount(
             stub.getBorderUseCaseMock,
-            executeWithBorderAndShapeAndVariantNumberOfCalls: 0
+            executeWithThemeAndAppearanceAndIntentAndShapeAndVariantAndRemoveStylesNumberOfCalls: 0
         )
-        ButtonGetContextColorsUseCaseableDeprecatedMockTest.XCTAssert(
-            stub.getContextColorsUseCaseMock,
-            expectedNumberOfCalls: givenIsDifferentNewValue ? 1 : 0,
-            givenTheme: stub.themeMock,
-            givenIntent: newValue,
-            givenVariant: variantMock,
-            expectedReturnValue: stub.contextColorsMock
-        )
-        ButtonGetColorsUseCaseableDeprecatedMockTest.XCTAssert(
+        ButtonGetColorsUseCaseableMockTest.XCTAssert(
             stub.getColorsUseCaseMock,
             expectedNumberOfCalls: givenIsDifferentNewValue ? 1 : 0,
-            givenContextColors: stub.contextColorsMock,
+            givenTheme: stub.themeMock,
+            givenAppearance: nil,
+            givenIntent: newValue,
+            givenVariant: variantMock,
             givenIsPressed: false,
             expectedReturnValue: stub.colorsMock
         )
@@ -330,26 +324,24 @@ final class ButtonMainViewModelDeprecatedTests: XCTestCase {
 
         // **
         // Use Cases
-        ButtonGetBorderUseCaseableDeprecatedMockTest.XCTAssert(
+        ButtonGetBorderUseCaseableMockTest.XCTAssert(
             stub.getBorderUseCaseMock,
             expectedNumberOfCalls: givenIsDifferentNewValue ? 1 : 0,
-            givenBorder: stub.themeMock.border as? BorderGeneratedMock,
+            givenTheme: stub.themeMock,
+            givenAppearance: nil,
+            givenIntent: intentMock,
             givenShape: stub.shapeMock,
             givenVariant: newValue,
+            givenRemoveStyles: false,
             expectedReturnValue: stub.borderMock
         )
-        ButtonGetContextColorsUseCaseableDeprecatedMockTest.XCTAssert(
-            stub.getContextColorsUseCaseMock,
-            expectedNumberOfCalls: givenIsDifferentNewValue ? 1 : 0,
-            givenTheme: stub.themeMock,
-            givenIntent: intentMock,
-            givenVariant: newValue,
-            expectedReturnValue: stub.contextColorsMock
-        )
-        ButtonGetColorsUseCaseableDeprecatedMockTest.XCTAssert(
+        ButtonGetColorsUseCaseableMockTest.XCTAssert(
             stub.getColorsUseCaseMock,
             expectedNumberOfCalls: givenIsDifferentNewValue ? 1 : 0,
-            givenContextColors: stub.contextColorsMock,
+            givenTheme: stub.themeMock,
+            givenAppearance: nil,
+            givenIntent: intentMock,
+            givenVariant: newValue,
             givenIsPressed: false,
             expectedReturnValue: stub.colorsMock
         )
@@ -431,17 +423,13 @@ final class ButtonMainViewModelDeprecatedTests: XCTestCase {
 
         // **
         // Use Cases
-        ButtonGetBorderUseCaseableDeprecatedMockTest.XCTCallsCount(
+        ButtonGetBorderUseCaseableMockTest.XCTCallsCount(
             stub.getBorderUseCaseMock,
-            executeWithBorderAndShapeAndVariantNumberOfCalls: 0
+            executeWithThemeAndAppearanceAndIntentAndShapeAndVariantAndRemoveStylesNumberOfCalls: 0
         )
-        ButtonGetContextColorsUseCaseableDeprecatedMockTest.XCTCallsCount(
-            stub.getContextColorsUseCaseMock,
-            executeWithThemeAndIntentAndVariantNumberOfCalls: 0
-        )
-        ButtonGetColorsUseCaseableDeprecatedMockTest.XCTCallsCount(
+        ButtonGetColorsUseCaseableMockTest.XCTCallsCount(
             stub.getColorsUseCaseMock,
-            executeWithContextColorsAndIsPressedNumberOfCalls: 0
+            executeWithThemeAndAppearanceAndIntentAndVariantAndIsPressedNumberOfCalls: 0
         )
         ButtonGetSizesUseCaseableDeprecatedMockTest.XCTAssert(
             stub.getSizesUseCaseMock,
@@ -519,17 +507,13 @@ final class ButtonMainViewModelDeprecatedTests: XCTestCase {
 
         // **
         // Use Cases
-        ButtonGetBorderUseCaseableDeprecatedMockTest.XCTCallsCount(
+        ButtonGetBorderUseCaseableMockTest.XCTCallsCount(
             stub.getBorderUseCaseMock,
-            executeWithBorderAndShapeAndVariantNumberOfCalls: 0
+            executeWithThemeAndAppearanceAndIntentAndShapeAndVariantAndRemoveStylesNumberOfCalls: 0
         )
-        ButtonGetContextColorsUseCaseableDeprecatedMockTest.XCTCallsCount(
-            stub.getContextColorsUseCaseMock,
-            executeWithThemeAndIntentAndVariantNumberOfCalls: 0
-        )
-        ButtonGetColorsUseCaseableDeprecatedMockTest.XCTCallsCount(
+        ButtonGetColorsUseCaseableMockTest.XCTCallsCount(
             stub.getColorsUseCaseMock,
-            executeWithContextColorsAndIsPressedNumberOfCalls: 0
+            executeWithThemeAndAppearanceAndIntentAndVariantAndIsPressedNumberOfCalls: 0
         )
         ButtonGetSizesUseCaseableDeprecatedMockTest.XCTCallsCount(
             stub.getSizesUseCaseMock,
@@ -541,6 +525,109 @@ final class ButtonMainViewModelDeprecatedTests: XCTestCase {
             givenIsEnabled: newValue,
             givenDims: stub.themeMock.dims as? DimsGeneratedMock,
             expectedReturnValue: stub.stateMock
+        )
+        // **
+    }
+
+    func test_set_appearance_with_different_new_value() {
+        self.testSetAppearance(
+            givenIsDifferentNewValue: true
+        )
+    }
+
+    func test_set_appearance_with_same_new_value() {
+        self.testSetAppearance(
+            givenIsDifferentNewValue: false
+        )
+    }
+
+    private func testSetAppearance(
+        givenIsDifferentNewValue: Bool
+    ) {
+        // GIVEN
+        let defaultValue: ButtonAppearance? = .primary
+        let newValue: ButtonAppearance? = givenIsDifferentNewValue ? .secondary : defaultValue
+
+        let intentMock: ButtonIntent = .main
+        let variantMock: ButtonVariant = .filled
+
+        let stub = Stub(
+            intent: intentMock,
+            variant: variantMock
+        )
+        let viewModel = stub.viewModel
+
+        viewModel.appearance = defaultValue
+
+        stub.subscribePublishers(on: &self.subscriptions)
+
+        viewModel.load() // Needed to get colors from usecase one time
+
+        // Reset all dependencies mocked data
+        stub.resetMockedData()
+
+        // WHEN
+        viewModel.appearance = newValue
+
+        // THEN
+        XCTAssertEqual(
+            viewModel.appearance,
+            newValue,
+            "Wrong appearance value"
+        )
+
+        // **
+        // Published properties
+        ButtonMainViewModelDeprecatedPublisherTest.XCTSinksCount(
+            state: stub.statePublisherMock,
+            expectedNumberOfSinks: 0
+        )
+        ButtonMainViewModelDeprecatedPublisherTest.XCTAssert(
+            colors: stub.colorsPublisherMock,
+            expectedNumberOfSinks: givenIsDifferentNewValue ? 1 : 0,
+            expectedValue: stub.colorsMock
+        )
+        ButtonMainViewModelDeprecatedPublisherTest.XCTSinksCount(
+            sizes: stub.sizesPublisherMock,
+            expectedNumberOfSinks: 0
+        )
+        ButtonMainViewModelDeprecatedPublisherTest.XCTAssert(
+            border: stub.borderPublisherMock,
+            expectedNumberOfSinks: givenIsDifferentNewValue ? 1 : 0,
+            expectedValue: stub.borderMock
+        )
+        // **
+
+        // **
+        // Use Cases
+        ButtonGetBorderUseCaseableMockTest.XCTAssert(
+            stub.getBorderUseCaseMock,
+            expectedNumberOfCalls: givenIsDifferentNewValue ? 1 : 0,
+            givenTheme: stub.themeMock,
+            givenAppearance: newValue,
+            givenIntent: intentMock,
+            givenShape: stub.shapeMock,
+            givenVariant: variantMock,
+            givenRemoveStyles: false,
+            expectedReturnValue: stub.borderMock
+        )
+        ButtonGetColorsUseCaseableMockTest.XCTAssert(
+            stub.getColorsUseCaseMock,
+            expectedNumberOfCalls: givenIsDifferentNewValue ? 1 : 0,
+            givenTheme: stub.themeMock,
+            givenAppearance: newValue,
+            givenIntent: intentMock,
+            givenVariant: variantMock,
+            givenIsPressed: false,
+            expectedReturnValue: stub.colorsMock
+        )
+        ButtonGetSizesUseCaseableDeprecatedMockTest.XCTCallsCount(
+            stub.getSizesUseCaseMock,
+            executeWithSizeAndTypeNumberOfCalls: 0
+        )
+        ButtonGetStateUseCaseDeprecatedableMockTest.XCTCallsCount(
+            stub.getStateUseCaseMock,
+            executeWithIsEnabledAndDimsNumberOfCalls: 0
         )
         // **
     }
@@ -643,26 +730,24 @@ final class ButtonMainViewModelDeprecatedTests: XCTestCase {
 
         // **
         // Use Cases
-        ButtonGetBorderUseCaseableDeprecatedMockTest.XCTAssert(
+        ButtonGetBorderUseCaseableMockTest.XCTAssert(
             stub.getBorderUseCaseMock,
             expectedNumberOfCalls: testAllDataType.expectedCalledPropertiesAndUseCases ? 1 : 0,
-            givenBorder: themeMock.border as? BorderGeneratedMock,
+            givenTheme: themeMock,
+            givenAppearance: nil,
+            givenIntent: intentMock,
             givenShape: shapeMock,
             givenVariant: variantMock,
+            givenRemoveStyles: false,
             expectedReturnValue: stub.borderMock
         )
-        ButtonGetContextColorsUseCaseableDeprecatedMockTest.XCTAssert(
-            stub.getContextColorsUseCaseMock,
-            expectedNumberOfCalls: testAllDataType.expectedCalledPropertiesAndUseCases ? 1 : 0,
-            givenTheme: themeMock,
-            givenIntent: intentMock,
-            givenVariant: variantMock,
-            expectedReturnValue: stub.contextColorsMock
-        )
-        ButtonGetColorsUseCaseableDeprecatedMockTest.XCTAssert(
+        ButtonGetColorsUseCaseableMockTest.XCTAssert(
             stub.getColorsUseCaseMock,
             expectedNumberOfCalls: testAllDataType.expectedCalledPropertiesAndUseCases ? 1 : 0,
-            givenContextColors: stub.contextColorsMock,
+            givenTheme: themeMock,
+            givenAppearance: nil,
+            givenIntent: intentMock,
+            givenVariant: variantMock,
             givenIsPressed: false,
             expectedReturnValue: stub.colorsMock
         )
@@ -695,8 +780,12 @@ private final class Stub: ButtonMainViewModelDeprecatedStub {
     let shapeMock: ButtonShape = .pill
 
     let borderMock = ButtonBorder.mocked()
-    let contextColorsMock = ButtonContextColorsDeprecated.mocked()
-    let colorsMock = ButtonColorsDeprecated.mocked()
+    let colorsMock = ButtonColors(
+        tintColor: ColorTokenGeneratedMock.blue(),
+        iconColor: ColorTokenGeneratedMock.red(),
+        backgroundColor: ColorTokenGeneratedMock.yellow(),
+        borderColor: ColorTokenGeneratedMock.purple()
+    )
     let sizesMock = ButtonSizes.mocked()
     let stateMock = ButtonStateDeprecated.mocked()
 
@@ -711,14 +800,11 @@ private final class Stub: ButtonMainViewModelDeprecatedStub {
     ) {
         // **
         // Use Cases
-        let getBorderUseCaseMock = ButtonGetBorderUseCaseableDeprecatedGeneratedMock()
-        getBorderUseCaseMock.executeWithBorderAndShapeAndVariantReturnValue = self.borderMock
+        let getBorderUseCaseMock = ButtonGetBorderUseCaseableGeneratedMock()
+        getBorderUseCaseMock.executeWithThemeAndAppearanceAndIntentAndShapeAndVariantAndRemoveStylesReturnValue = self.borderMock
 
-        let getContextColorsUseCaseMock = ButtonGetContextColorsUseCaseableDeprecatedGeneratedMock()
-        getContextColorsUseCaseMock.executeWithThemeAndIntentAndVariantReturnValue = self.contextColorsMock
-
-        let getColorsUseCaseMock = ButtonGetColorsUseCaseableDeprecatedGeneratedMock()
-        getColorsUseCaseMock.executeWithContextColorsAndIsPressedReturnValue = self.colorsMock
+        let getColorsUseCaseMock = ButtonGetColorsUseCaseableGeneratedMock()
+        getColorsUseCaseMock.executeWithThemeAndAppearanceAndIntentAndVariantAndIsPressedReturnValue = self.colorsMock
 
         let getSizesUseCaseMock = ButtonGetSizesUseCaseableDeprecatedGeneratedMock()
         getSizesUseCaseMock.executeWithSizeAndTypeReturnValue = self.sizesMock
@@ -731,12 +817,12 @@ private final class Stub: ButtonMainViewModelDeprecatedStub {
             for: frameworkType,
             type: .button,
             theme: self.themeMock,
+            appearance: nil,
             intent: intent,
             variant: variant,
             shape: self.shapeMock,
             size: size,
             getBorderUseCase: getBorderUseCaseMock,
-            getContextColorsUseCase: getContextColorsUseCaseMock,
             getColorsUseCase: getColorsUseCaseMock,
             getSizesUseCase: getSizesUseCaseMock,
             getStateUseCase: getStateUseCaseMock
@@ -745,7 +831,6 @@ private final class Stub: ButtonMainViewModelDeprecatedStub {
         super.init(
             viewModel: viewModel,
             getBorderUseCaseMock: getBorderUseCaseMock,
-            getContextColorsUseCaseMock: getContextColorsUseCaseMock,
             getColorsUseCaseMock: getColorsUseCaseMock,
             getSizesUseCaseMock: getSizesUseCaseMock,
             getStateUseCaseMock: getStateUseCaseMock

@@ -165,6 +165,15 @@ public final class SparkUIButton: UIControl {
         }
     }
 
+    /// The appearance of the button.
+    /// Replace the ``ButtonIntent`` and the ``ButtonVariant``.
+    /// Check the ``ButtonAppearance`` to see the **default** value.
+    public var appearance: ButtonAppearance? {
+        didSet {
+            self.viewModel.appearance = self.appearance
+        }
+    }
+
     /// The intent of the button.
     /// Check the ``ButtonIntent`` to see the **default** value.
     public var intent: ButtonIntent = .default {
@@ -385,6 +394,7 @@ public final class SparkUIButton: UIControl {
     private func setupView() {
         // Add subviews
         self.addSubview(self.contentStackView)
+        self.sparkVisualIdentification()
 
         // Update UI
         self.updateAlignment()
@@ -408,6 +418,7 @@ public final class SparkUIButton: UIControl {
         // Setup view model
         self.viewModel.setup(
             theme: self.theme,
+            appearance: self.appearance,
             intent: self.intent,
             variant: self.variant,
             shape: self.shape,
@@ -529,7 +540,7 @@ public final class SparkUIButton: UIControl {
 
         self.backgroundColor = colors.backgroundColor.uiColor
         self.titleLabel.textColor = colors.tintColor.uiColor
-        self._imageView.tintColor = colors.tintColor.uiColor
+        self._imageView.tintColor = colors.iconColor.uiColor
         self.spinner.intent = .custom(colors.tintColor)
     }
 

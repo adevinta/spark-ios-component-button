@@ -26,6 +26,7 @@ struct IconButtonConfigurationSnapshotTestsDeprecated {
 
     let scenario: IconButtonScenarioSnapshotTestsDeprecated
 
+    let appearance: ButtonAppearance?
     let intent: ButtonIntent
     let shape: ButtonShape
     let size: ButtonSize
@@ -41,6 +42,7 @@ struct IconButtonConfigurationSnapshotTestsDeprecated {
 
     init(
         scenario: IconButtonScenarioSnapshotTestsDeprecated,
+        appearance: ButtonAppearance? = nil,
         intent: ButtonIntent = .main,
         shape: ButtonShape = .default,
         size: ButtonSize = .medium,
@@ -51,6 +53,7 @@ struct IconButtonConfigurationSnapshotTestsDeprecated {
         sizes: [UIContentSizeCategory] = Constants.Sizes.default
     ) {
         self.scenario = scenario
+        self.appearance = appearance
         self.intent = intent
         self.shape = shape
         self.size = size
@@ -66,11 +69,11 @@ struct IconButtonConfigurationSnapshotTestsDeprecated {
     func testName() -> String {
         return [
             "\(self.scenario.rawValue)",
+            self.appearance.map { "\($0)" + "Appearance" },
             "\(self.intent)",
             "\(self.shape)" + "Shape",
             "\(self.size)" + "Size",
             "\(self.variant)" + "Variant",
-            "\(self.state)" + "State",
             "\(self.state)" + "State"
         ].compactMap { $0 }.joined(separator: "-")
     }

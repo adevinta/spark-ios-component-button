@@ -71,6 +71,18 @@ public class ButtonMainUIView: UIControl {
         }
     }
 
+    /// The appearance of the button.
+    /// Replace the ``ButtonIntent`` and the ``ButtonVariant``.
+    /// Check the ``ButtonAppearance`` to see the **default** value.
+    public var appearance: ButtonAppearance? {
+        get {
+            return self.viewModel.appearance
+        }
+        set {
+            self.viewModel.appearance = newValue
+        }
+    }
+
     /// The intent of the button.
     public var intent: ButtonIntent {
         get {
@@ -177,6 +189,9 @@ public class ButtonMainUIView: UIControl {
     /// Setup the all needed data for this view and all subviews.
     /// This method is internal because it can be overriden by the view that inherits from this class.
     internal func setupView() {
+        // Identification
+        self.sparkVisualIdentification()
+
         // Accessibility
         self.accessibilityTraits = [.button]
         self.isAccessibilityElement = true
@@ -256,7 +271,7 @@ public class ButtonMainUIView: UIControl {
 
     // MARK: - Update UI
 
-    private func updateBorder(colors: ButtonColorsDeprecated? = nil) {
+    private func updateBorder(colors: ButtonColors? = nil) {
         guard let colors = colors ?? self.viewModel.colors else {
             return
         }
@@ -308,7 +323,7 @@ public class ButtonMainUIView: UIControl {
 
     /// UI must be update when colors are updated on ViewModel.
     /// This method is internal because it can be overriden by the view that inherits from this class.
-    internal func colorsDidUpdate(_ colors: ButtonColorsDeprecated) {
+    internal func colorsDidUpdate(_ colors: ButtonColors) {
         // Background Color
         let backgroundColor: UIColor = colors.backgroundColor.uiColor
 
@@ -323,7 +338,7 @@ public class ButtonMainUIView: UIControl {
         self.updateBorder(colors: colors)
 
         // Foreground Color
-        self.imageView.tintColor = colors.imageTintColor.uiColor
+        self.imageView.tintColor = colors.iconColor.uiColor
     }
 
     /// UI must be update when image change on imageStateView.

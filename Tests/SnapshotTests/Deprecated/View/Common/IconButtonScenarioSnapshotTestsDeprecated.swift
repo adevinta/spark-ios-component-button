@@ -23,6 +23,7 @@ enum IconButtonScenarioSnapshotTestsDeprecated: String, CaseIterable {
     case test3
     case test4
     case test5
+    case test6
 
     // MARK: - Type Alias
 
@@ -42,6 +43,8 @@ enum IconButtonScenarioSnapshotTestsDeprecated: String, CaseIterable {
             return self.test4(isSwiftUIComponent: isSwiftUIComponent)
         case .test5:
             return self.test5(isSwiftUIComponent: isSwiftUIComponent)
+        case .test6:
+            return self.test6(isSwiftUIComponent: isSwiftUIComponent)
         }
     }
 
@@ -205,6 +208,40 @@ enum IconButtonScenarioSnapshotTestsDeprecated: String, CaseIterable {
                 shape: shape,
                 image: image,
                 sizes: Constants.Sizes.all
+            )
+        }
+    }
+
+    /// Test 6
+    ///
+    /// Description: To test all appearances
+    ///
+    /// Content:
+    /// - **appearance: all**
+    /// - intent: default
+    /// - alignment: default
+    /// - size: default
+    /// - variant: default
+    /// - content: default
+    /// - state: default
+    /// - mode: all
+    /// - a11y: default
+    private func test6(isSwiftUIComponent: Bool) -> [IconButtonConfigurationSnapshotTestsDeprecated] {
+        let appearances = ButtonAppearance.allCases
+
+        return appearances.compactMap { appearance -> IconButtonConfigurationSnapshotTestsDeprecated? in
+            guard let image = ImageEither.mock(
+                isSwiftUIComponent: isSwiftUIComponent,
+                for: .normal
+            ) else {
+                return nil
+            }
+
+            return .init(
+                scenario: self,
+                appearance: appearance,
+                image: image,
+                modes: Constants.Modes.all
             )
         }
     }
