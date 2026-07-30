@@ -207,6 +207,7 @@ public struct SparkButton<Label, ImageLabel, Content>: View where Label: View, I
     @Environment(\.buttonAlignment) private var alignment
     @Environment(\.buttonContentVisibility) private var contentVisibility
     @Environment(\.buttonHasFeedback) private var hasFeedback
+    @Environment(\.buttonAppearance) private var appearance
     @Environment(\.buttonIntent) private var intent
     @Environment(\.buttonIsLoading) private var isLoading
     @Environment(\.buttonMaxWidth) private var maxWidth
@@ -297,9 +298,11 @@ public struct SparkButton<Label, ImageLabel, Content>: View where Label: View, I
             self.label()
         }
         .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
+        .sparkVisualIdentification()
         .onAppear() {
             self.viewModel.setup(
                 theme: self.theme.value,
+                appearance: self.appearance,
                 intent: self.intent,
                 variant: self.variant,
                 shape: self.shape,
@@ -313,6 +316,9 @@ public struct SparkButton<Label, ImageLabel, Content>: View where Label: View, I
         }
         .onChange(of: self.theme) { theme in
             self.viewModel.theme = theme.value
+        }
+        .onChange(of: self.appearance) { appearance in
+            self.viewModel.appearance = appearance
         }
         .onChange(of: self.intent) { intent in
             self.viewModel.intent = intent
@@ -373,7 +379,7 @@ public struct SparkButton<Label, ImageLabel, Content>: View where Label: View, I
                 size: self.viewModel.sizes.imageSize,
                 alignment: .center
             )
-            .foregroundStyle(self.viewModel.colors.tintColor)
+            .foregroundStyle(self.viewModel.colors.iconColor)
 
         let label = self.label()
             .foregroundStyle(self.viewModel.colors.tintColor)

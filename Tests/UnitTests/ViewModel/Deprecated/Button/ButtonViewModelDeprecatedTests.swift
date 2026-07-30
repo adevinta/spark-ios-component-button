@@ -259,6 +259,7 @@ private final class Stub: ButtonViewModelDeprecatedStub {
         let viewModel = ButtonViewModelDeprecated(
             for: frameworkType,
             theme: self.themeMock,
+            appearance: .default,
             intent: .main,
             variant: .filled,
             shape: .pill,

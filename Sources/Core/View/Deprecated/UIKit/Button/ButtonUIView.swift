@@ -133,13 +133,58 @@ public final class ButtonUIView: ButtonMainUIView {
     /// Initialize a new button view.
     /// - Parameters:
     ///   - theme: The spark theme of the button.
+    ///   - appearance: The appearance of the button.
+    ///   - shape: The shape of the button.
+    ///   - size: The size of the button.
+    ///   - alignment: The alignment of the button.
+    public convenience init(
+        theme: any Theme,
+        appearance: ButtonAppearance,
+        size: ButtonSize,
+        shape: ButtonShape,
+        alignment: ButtonAlignment
+    ) {
+        self.init(
+            theme: theme,
+            appearance: appearance,
+            intent: .default,
+            variant: .default,
+            size: size,
+            shape: shape,
+            alignment: alignment
+        )
+    }
+
+    /// Initialize a new button view.
+    /// - Parameters:
+    ///   - theme: The spark theme of the button.
     ///   - intent: The intent of the button.
     ///   - variant: The variant of the button.
     ///   - shape: The shape of the button.
     ///   - size: The size of the button.
     ///   - alignment: The alignment of the button.
-    public init(
+    public convenience init(
         theme: any Theme,
+        intent: ButtonIntent,
+        variant: ButtonVariant,
+        size: ButtonSize,
+        shape: ButtonShape,
+        alignment: ButtonAlignment
+    ) {
+        self.init(
+            theme: theme,
+            appearance: nil,
+            intent: intent,
+            variant: variant,
+            size: size,
+            shape: shape,
+            alignment: alignment
+        )
+    }
+
+    private init(
+        theme: any Theme,
+        appearance: ButtonAppearance?,
         intent: ButtonIntent,
         variant: ButtonVariant,
         size: ButtonSize,
@@ -149,6 +194,7 @@ public final class ButtonUIView: ButtonMainUIView {
         let viewModel = ButtonViewModelDeprecated(
             for: .uiKit,
             theme: theme,
+            appearance: appearance,
             intent: intent,
             variant: variant,
             shape: shape,
@@ -314,12 +360,10 @@ public final class ButtonUIView: ButtonMainUIView {
         self.updateSpacings()
     }
 
-    internal override func colorsDidUpdate(_ colors: ButtonColorsDeprecated) {
+    internal override func colorsDidUpdate(_ colors: ButtonColors) {
         super.colorsDidUpdate(colors)
 
-        if let titleColor = colors.titleColor {
-            self.titleLabel.textColor = titleColor.uiColor
-        }
+        self.titleLabel.textColor = colors.tintColor.uiColor
     }
 
     internal override func isImageOnStateViewDidUpdate(_ isImage: Bool) {

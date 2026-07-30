@@ -34,6 +34,7 @@ final class SparkButtonSnapshotTests: SwiftUIComponentSnapshotTestCase {
 
                 let view = self.component(configuration: configuration)
                     .sparkTheme(self.theme)
+                    .appearance(configuration: configuration)
                     .sparkButtonIntent(configuration.intent)
                     .sparkButtonVariant(configuration.variant)
                     .sparkButtonShape(configuration.shape)
@@ -104,7 +105,7 @@ final class SparkButtonSnapshotTests: SwiftUIComponentSnapshotTestCase {
 
     @ViewBuilder
     private func componentWithNativeTitle() -> some View {
-        SparkButton(String.mock, ) {
+        SparkButton(String.mock) {
             // Action
         }
     }
@@ -187,6 +188,20 @@ final class SparkButtonSnapshotTests: SwiftUIComponentSnapshotTestCase {
                 SparkButtonImage(image: .mock)
             }
         )
+    }
+}
+
+// MARK: - Button Extension
+
+private extension View {
+
+    @ViewBuilder
+    func appearance(configuration: ButtonConfigurationSnapshotTests) -> some View {
+        if let appearance = configuration.appearance {
+            self.sparkButtonAppearance(appearance)
+        } else {
+            self
+        }
     }
 }
 

@@ -28,6 +28,34 @@ public struct ButtonView: View {
     /// Initialize a new button view.
     /// - Parameters:
     ///   - theme: The spark theme of the button.
+    ///   - appearance: The appearance of the button.
+    ///   - size: The size of the button.
+    ///   - shape: The shape of the button.
+    ///   - alignment: The alignment of the button.
+    ///   - action: The action of the button.
+    public init(
+        theme: any Theme,
+        appearance: ButtonAppearance,
+        size: ButtonSize,
+        shape: ButtonShape,
+        alignment: ButtonAlignment,
+        action: @escaping () -> Void
+    ) {
+        self.init(
+            theme: theme,
+            appearance: appearance,
+            intent: .default,
+            variant: .default,
+            size: size,
+            shape: shape,
+            alignment: alignment,
+            action: action
+        )
+    }
+
+    /// Initialize a new button view.
+    /// - Parameters:
+    ///   - theme: The spark theme of the button.
     ///   - intent: The intent of the button.
     ///   - variant: The variant of the button.
     ///   - size: The size of the button.
@@ -43,8 +71,31 @@ public struct ButtonView: View {
         alignment: ButtonAlignment,
         action: @escaping () -> Void
     ) {
+        self.init(
+            theme: theme,
+            appearance: nil,
+            intent: intent,
+            variant: variant,
+            size: size,
+            shape: shape,
+            alignment: alignment,
+            action: action
+        )
+    }
+
+    private init(
+        theme: any Theme,
+        appearance: ButtonAppearance?,
+        intent: ButtonIntent,
+        variant: ButtonVariant,
+        size: ButtonSize,
+        shape: ButtonShape,
+        alignment: ButtonAlignment,
+        action: @escaping () -> Void
+    ) {
         let viewModel = ButtonSUIViewModelDeprecated(
             theme: theme,
+            appearance: appearance,
             intent: intent,
             variant: variant,
             shape: shape,
@@ -109,7 +160,7 @@ public struct ButtonView: View {
     private func title() -> some View {
         if let text = self.viewModel.controlStateText?.text {
             Text(text)
-                .foregroundStyle(self.viewModel.colors?.titleColor?.color ?? ColorTokenDefault.clear.color)
+                .foregroundStyle(self.viewModel.colors?.tintColor.color ?? ColorTokenDefault.clear.color)
                 .font(self.viewModel.titleFontToken?.font)
                 .accessibilityIdentifier(ButtonAccessibilityIdentifier.text)
                 .animation(nil, value: text)

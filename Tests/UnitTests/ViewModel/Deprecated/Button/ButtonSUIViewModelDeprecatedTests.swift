@@ -19,6 +19,7 @@ final class ButtonSUIViewModelDeprecatedTests: XCTestCase {
         // GIVEN / WHEN
         let viewModel = ButtonSUIViewModelDeprecated(
             theme: ThemeGeneratedMock.mocked(),
+            appearance: .default,
             intent: .main,
             variant: .filled,
             shape: .pill,

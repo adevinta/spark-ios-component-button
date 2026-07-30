@@ -20,12 +20,52 @@ public final class IconButtonUIView: ButtonMainUIView {
     /// Initialize a new button view.
     /// - Parameters:
     ///   - theme: The spark theme of the button.
+    ///   - appearance: The appearance of the button.
+    ///   - shape: The shape of the button.
+    ///   - size: The size of the button.
+    public convenience init(
+        theme: any Theme,
+        appearance: ButtonAppearance,
+        size: ButtonSize,
+        shape: ButtonShape
+    ) {
+        self.init(
+            theme: theme,
+            appearance: appearance,
+            intent: .default,
+            variant: .default,
+            size: size,
+            shape: shape
+        )
+    }
+
+    /// Initialize a new button view.
+    /// - Parameters:
+    ///   - theme: The spark theme of the button.
     ///   - intent: The intent of the button.
     ///   - variant: The variant of the button.
     ///   - shape: The shape of the button.
     ///   - size: The size of the button.
-    public init(
+    public convenience init(
         theme: any Theme,
+        intent: ButtonIntent,
+        variant: ButtonVariant,
+        size: ButtonSize,
+        shape: ButtonShape
+    ) {
+        self.init(
+            theme: theme,
+            appearance: nil,
+            intent: intent,
+            variant: variant,
+            size: size,
+            shape: shape
+        )
+    }
+
+    private init(
+        theme: any Theme,
+        appearance: ButtonAppearance?,
         intent: ButtonIntent,
         variant: ButtonVariant,
         size: ButtonSize,
@@ -34,6 +74,7 @@ public final class IconButtonUIView: ButtonMainUIView {
         let viewModel = IconButtonViewModelDeprecated(
             for: .uiKit,
             theme: theme,
+            appearance: appearance,
             intent: intent,
             variant: variant,
             shape: shape,

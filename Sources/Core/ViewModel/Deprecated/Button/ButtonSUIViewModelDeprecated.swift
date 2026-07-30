@@ -28,6 +28,7 @@ final class ButtonSUIViewModelDeprecated: ButtonViewModelDeprecated, ButtonMainS
 
     init(
         theme: any Theme,
+        appearance: ButtonAppearance?, // TODO: Remove ASAP the optional
         intent: ButtonIntent,
         variant: ButtonVariant,
         shape: ButtonShape,
@@ -37,6 +38,7 @@ final class ButtonSUIViewModelDeprecated: ButtonViewModelDeprecated, ButtonMainS
         super.init(
             for: .swiftUI,
             theme: theme,
+            appearance: appearance,
             intent: intent,
             variant: variant,
             shape: shape,

@@ -24,7 +24,7 @@ struct ButtonImageView<ViewModel: ButtonMainViewModelDeprecated & ButtonMainSUIV
     init(viewModel: ViewModel) {
         self.image = viewModel.controlStateImage.image
         self.size = viewModel.sizes?.imageSize ?? .zero
-        self.foregroundColor = viewModel.colors?.imageTintColor
+        self.foregroundColor = viewModel.colors?.iconColor
     }
 
     // MARK: - View

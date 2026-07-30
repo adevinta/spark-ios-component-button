@@ -77,6 +77,8 @@ final class ButtonViewModelTests: XCTestCase {
             stub.getBorderUseCaseMock,
             expectedNumberOfCalls: 1,
             givenTheme: stub.givenTheme,
+            givenAppearance: stub.givenAppearance,
+            givenIntent: stub.givenIntent,
             givenShape: stub.givenShape,
             givenVariant: stub.givenVariant,
             givenRemoveStyles: stub.givenRemoveStyles,
@@ -87,6 +89,7 @@ final class ButtonViewModelTests: XCTestCase {
             stub.getColorsUseCaseMock,
             expectedNumberOfCalls: 1,
             givenTheme: stub.givenTheme,
+            givenAppearance: stub.givenAppearance,
             givenIntent: stub.givenIntent,
             givenVariant: stub.givenVariant,
             givenIsPressed: stub.givenIsPressed,
@@ -166,6 +169,8 @@ final class ButtonViewModelTests: XCTestCase {
             stub.getBorderUseCaseMock,
             expectedNumberOfCalls: 1,
             givenTheme: newTheme,
+            givenAppearance: stub.givenAppearance,
+            givenIntent: stub.givenIntent,
             givenShape: stub.givenShape,
             givenVariant: stub.givenVariant,
             givenRemoveStyles: stub.givenRemoveStyles,
@@ -176,6 +181,7 @@ final class ButtonViewModelTests: XCTestCase {
             stub.getColorsUseCaseMock,
             expectedNumberOfCalls: 1,
             givenTheme: newTheme,
+            givenAppearance: stub.givenAppearance,
             givenIntent: stub.givenIntent,
             givenVariant: stub.givenVariant,
             givenIsPressed: stub.givenIsPressed,
@@ -207,7 +213,56 @@ final class ButtonViewModelTests: XCTestCase {
         )
     }
 
-    func test_intentChanged_shouldUpdateColorsOnly() {
+    func test_appearanceChanged_shouldUpdateBorderAndColorsOnly() {
+        // GIVEN
+        let stub = Stub()
+        let viewModel = stub.viewModel
+
+        viewModel.setup(stub: stub)
+        stub.resetMockedData()
+
+        let newAppearance = ButtonAppearance.ai
+
+        // WHEN
+        viewModel.appearance = newAppearance
+
+        // THEN
+        XCTAssertEqualToExpected(on: stub)
+
+        ButtonGetBorderUseCaseableMockTest.XCTAssert(
+            stub.getBorderUseCaseMock,
+            expectedNumberOfCalls: 1,
+            givenTheme: stub.givenTheme,
+            givenAppearance: newAppearance,
+            givenIntent: stub.givenIntent,
+            givenShape: stub.givenShape,
+            givenVariant: stub.givenVariant,
+            givenRemoveStyles: stub.givenRemoveStyles,
+            expectedReturnValue: stub.expectedBorder
+        )
+
+        ButtonGetColorsUseCaseableMockTest.XCTAssert(
+            stub.getColorsUseCaseMock,
+            expectedNumberOfCalls: 1,
+            givenTheme: stub.givenTheme,
+            givenAppearance: newAppearance,
+            givenIntent: stub.givenIntent,
+            givenVariant: stub.givenVariant,
+            givenIsPressed: stub.givenIsPressed,
+            expectedReturnValue: stub.expectedColors
+        )
+
+        XCTAssertNotCalled(
+            on: stub,
+            getSpacingsUseCase: true,
+            getSizesUseCase: true,
+            getDimUseCase: true,
+            getTitleFontTokenUseCase: true,
+            getShowContentUseCase: true
+        )
+    }
+
+    func test_intentChanged_shouldUpdateBorderAndColorsOnly() {
         // GIVEN
         let stub = Stub()
         let viewModel = stub.viewModel
@@ -223,10 +278,23 @@ final class ButtonViewModelTests: XCTestCase {
         // THEN
         XCTAssertEqualToExpected(on: stub)
 
+        ButtonGetBorderUseCaseableMockTest.XCTAssert(
+            stub.getBorderUseCaseMock,
+            expectedNumberOfCalls: 1,
+            givenTheme: stub.givenTheme,
+            givenAppearance: stub.givenAppearance,
+            givenIntent: newIntent,
+            givenShape: stub.givenShape,
+            givenVariant: stub.givenVariant,
+            givenRemoveStyles: stub.givenRemoveStyles,
+            expectedReturnValue: stub.expectedBorder
+        )
+
         ButtonGetColorsUseCaseableMockTest.XCTAssert(
             stub.getColorsUseCaseMock,
             expectedNumberOfCalls: 1,
             givenTheme: stub.givenTheme,
+            givenAppearance: stub.givenAppearance,
             givenIntent: newIntent,
             givenVariant: stub.givenVariant,
             givenIsPressed: stub.givenIsPressed,
@@ -235,7 +303,6 @@ final class ButtonViewModelTests: XCTestCase {
 
         XCTAssertNotCalled(
             on: stub,
-            getBorderUseCase: true,
             getSpacingsUseCase: true,
             getSizesUseCase: true,
             getDimUseCase: true,
@@ -264,6 +331,8 @@ final class ButtonViewModelTests: XCTestCase {
             stub.getBorderUseCaseMock,
             expectedNumberOfCalls: 1,
             givenTheme: stub.givenTheme,
+            givenAppearance: stub.givenAppearance,
+            givenIntent: stub.givenIntent,
             givenShape: stub.givenShape,
             givenVariant: newVariant,
             givenRemoveStyles: stub.givenRemoveStyles,
@@ -274,6 +343,7 @@ final class ButtonViewModelTests: XCTestCase {
             stub.getColorsUseCaseMock,
             expectedNumberOfCalls: 1,
             givenTheme: stub.givenTheme,
+            givenAppearance: stub.givenAppearance,
             givenIntent: stub.givenIntent,
             givenVariant: newVariant,
             givenIsPressed: stub.givenIsPressed,
@@ -310,6 +380,8 @@ final class ButtonViewModelTests: XCTestCase {
             stub.getBorderUseCaseMock,
             expectedNumberOfCalls: 1,
             givenTheme: stub.givenTheme,
+            givenAppearance: stub.givenAppearance,
+            givenIntent: stub.givenIntent,
             givenShape: newShape,
             givenVariant: stub.givenVariant,
             givenRemoveStyles: stub.givenRemoveStyles,
@@ -439,6 +511,7 @@ final class ButtonViewModelTests: XCTestCase {
             stub.getColorsUseCaseMock,
             expectedNumberOfCalls: 1,
             givenTheme: stub.givenTheme,
+            givenAppearance: stub.givenAppearance,
             givenIntent: stub.givenIntent,
             givenVariant: stub.givenVariant,
             givenIsPressed: newIsPressed,
@@ -611,6 +684,8 @@ final class ButtonViewModelTests: XCTestCase {
             stub.getBorderUseCaseMock,
             expectedNumberOfCalls: 1,
             givenTheme: stub.givenTheme,
+            givenAppearance: stub.givenAppearance,
+            givenIntent: stub.givenIntent,
             givenShape: stub.givenShape,
             givenVariant: stub.givenVariant,
             givenRemoveStyles: newRemoveStyles,
@@ -645,6 +720,7 @@ final class ButtonViewModelTests: XCTestCase {
 
         // WHEN
         viewModel.theme = ThemeGeneratedMock.mocked()
+        viewModel.appearance = stub.givenAppearance.otherRandom
         viewModel.intent = stub.givenIntent.otherRandom
         viewModel.variant = stub.givenVariant.otherRandom
         viewModel.shape = stub.givenShape.otherRandom
@@ -690,6 +766,7 @@ final class ButtonViewModelTests: XCTestCase {
 
         // WHEN
         viewModel.theme = stub.givenTheme
+        viewModel.appearance = stub.givenAppearance
         viewModel.intent = stub.givenIntent
         viewModel.variant = stub.givenVariant
         viewModel.shape = stub.givenShape
@@ -726,6 +803,7 @@ final class ButtonViewModelTests: XCTestCase {
 
         // WHEN
         viewModel.theme = nil
+        viewModel.appearance = nil
         viewModel.intent = nil
         viewModel.variant = nil
         viewModel.shape = nil
@@ -759,6 +837,7 @@ private final class Stub {
     // MARK: - Given
 
     let givenTheme = ThemeGeneratedMock.mocked()
+    let givenAppearance: ButtonAppearance = .danger
     let givenIntent: ButtonIntent = .main
     let givenVariant: ButtonVariant = .filled
     let givenShape: ButtonShape = .pill
@@ -811,10 +890,10 @@ private final class Stub {
 
     init() {
         let getBorderUseCaseMock = ButtonGetBorderUseCaseableGeneratedMock()
-        getBorderUseCaseMock.executeWithThemeAndShapeAndVariantAndRemoveStylesReturnValue = self.expectedBorder
+        getBorderUseCaseMock.executeWithThemeAndAppearanceAndIntentAndShapeAndVariantAndRemoveStylesReturnValue = self.expectedBorder
 
         let getColorsUseCaseMock = ButtonGetColorsUseCaseableGeneratedMock()
-        getColorsUseCaseMock.executeWithThemeAndIntentAndVariantAndIsPressedReturnValue = self.expectedColors
+        getColorsUseCaseMock.executeWithThemeAndAppearanceAndIntentAndVariantAndIsPressedReturnValue = self.expectedColors
 
         let getTitleFontTokenUseCaseMock = ButtonGetTitleFontTokenUseCaseableGeneratedMock()
         getTitleFontTokenUseCaseMock.executeWithThemeReturnValue = self.expectedTitleFontToken
@@ -870,6 +949,7 @@ private extension ButtonViewModel {
     func setup(stub: Stub) {
         self.setup(
             theme: stub.givenTheme,
+            appearance: stub.givenAppearance,
             intent: stub.givenIntent,
             variant: stub.givenVariant,
             shape: stub.givenShape,
@@ -895,12 +975,12 @@ private func XCTAssertNotCalled(
 ) {
     ButtonGetBorderUseCaseableMockTest.XCTCalled(
         stub.getBorderUseCaseMock,
-        executeWithThemeAndShapeAndVariantAndRemoveStylesCalled: !getBorderUseCase
+        executeWithThemeAndAppearanceAndIntentAndShapeAndVariantAndRemoveStylesCalled: !getBorderUseCase
     )
 
     ButtonGetColorsUseCaseableMockTest.XCTCalled(
         stub.getColorsUseCaseMock,
-        executeWithThemeAndIntentAndVariantAndIsPressedCalled: !getColorsUseCase
+        executeWithThemeAndAppearanceAndIntentAndVariantAndIsPressedCalled: !getColorsUseCase
     )
 
     ButtonGetTitleFontTokenUseCaseableMockTest.XCTCalled(

@@ -70,6 +70,7 @@ struct ButtonContainerView<ContainerView: View, ViewModel: ButtonMainViewModelDe
         .accessibilityShowsLargeContentViewer()
         .dynamicTypeSize(DynamicTypeSize.large...DynamicTypeSize.xxxLarge)
         .accessibilityAddTraits(.isButton)
+        .sparkVisualIdentification()
         .onChange(of: self.isPressed) { isPressed in
             self.viewModel.setIsPressed(isPressed)
         }

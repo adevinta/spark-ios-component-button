@@ -39,15 +39,7 @@ final class ButtonViewSnapshotTestsDeprecated: SwiftUIComponentSnapshotTestCase 
 
             for configuration in configurations {
 
-                let view = ButtonView(
-                    theme: self.theme,
-                    intent: configuration.intent,
-                    variant: configuration.variant,
-                    size: configuration.size,
-                    shape: configuration.shape,
-                    alignment: configuration.alignment,
-                    action: {}
-                )
+                let view = self.component(configuration: configuration)
                     .disabled(configuration.state == .disabled)
                     .selected(configuration.state == .selected)
                     .content(configuration)
@@ -60,6 +52,29 @@ final class ButtonViewSnapshotTestsDeprecated: SwiftUIComponentSnapshotTestCase 
                     testName: configuration.testName()
                 )
             }
+        }
+    }
+
+    private func component(configuration: ButtonConfigurationSnapshotTestsDeprecated) -> ButtonView {
+        return if let appearance = configuration.appearance {
+            .init(
+                theme: self.theme,
+                appearance: appearance,
+                size: configuration.size,
+                shape: configuration.shape,
+                alignment: configuration.alignment,
+                action: {}
+            )
+        } else {
+            .init(
+                theme: self.theme,
+                intent: configuration.intent,
+                variant: configuration.variant,
+                size: configuration.size,
+                shape: configuration.shape,
+                alignment: configuration.alignment,
+                action: {}
+            )
         }
     }
 }

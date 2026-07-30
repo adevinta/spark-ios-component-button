@@ -37,10 +37,20 @@ final class ButtonViewModel: ObservableObject {
         }
     }
 
+    var appearance: ButtonAppearance? {
+        didSet {
+            guard oldValue != self.appearance, self.alreadyUpdateAll else { return }
+
+            self.setBorder()
+            self.setColors()
+        }
+    }
+
     var intent: ButtonIntent? {
         didSet {
             guard oldValue != self.intent, self.alreadyUpdateAll else { return }
 
+            self.setBorder()
             self.setColors()
         }
     }
@@ -162,6 +172,7 @@ final class ButtonViewModel: ObservableObject {
 
     func setup(
         theme: any Theme,
+        appearance: ButtonAppearance?, // TODO: Remove ASAP the optional
         intent: ButtonIntent,
         variant: ButtonVariant,
         shape: ButtonShape,
@@ -173,6 +184,7 @@ final class ButtonViewModel: ObservableObject {
         isLoading: Bool
     ) {
         self.theme = theme
+        self.appearance = appearance
         self.intent = intent
         self.variant = variant
         self.shape = shape
@@ -198,6 +210,7 @@ final class ButtonViewModel: ObservableObject {
 
     private func setBorder() {
         guard let theme,
+              let intent,
               let shape,
               let variant,
               let removeStyles else {
@@ -206,6 +219,8 @@ final class ButtonViewModel: ObservableObject {
 
         self.border = self.getBorderUseCase.execute(
             theme: theme,
+            appearance: self.appearance,
+            intent: intent,
             shape: shape,
             variant: variant,
             removeStyles: removeStyles
@@ -217,6 +232,7 @@ final class ButtonViewModel: ObservableObject {
 
         self.colors = self.getColorsUseCase.execute(
             theme: theme,
+            appearance: self.appearance,
             intent: intent,
             variant: variant,
             isPressed: self.isPressed

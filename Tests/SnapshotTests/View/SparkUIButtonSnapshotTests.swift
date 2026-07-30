@@ -81,6 +81,7 @@ final class SparkUIButtonSnapshotTests: UIKitComponentSnapshotTestCase {
         }
 
         // Populate the button
+        button.appearance = configuration.appearance
         button.intent = configuration.intent
         button.variant = configuration.variant
         button.shape = configuration.shape
