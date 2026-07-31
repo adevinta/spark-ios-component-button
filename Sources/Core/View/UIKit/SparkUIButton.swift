@@ -315,6 +315,8 @@ public final class SparkUIButton: UIControl {
 
     private var customAccessibilityLabel: String?
 
+    private let visualIdentification = UUID().uuidString
+
     // MARK: - Initialization
 
     /// Creates a button with a theme and an optional custom style.
@@ -394,7 +396,6 @@ public final class SparkUIButton: UIControl {
     private func setupView() {
         // Add subviews
         self.addSubview(self.contentStackView)
-        self.sparkVisualIdentification()
 
         // Update UI
         self.updateAlignment()
@@ -437,6 +438,7 @@ public final class SparkUIButton: UIControl {
         super.layoutSubviews()
 
         self.updateBorder()
+        self.sparkVisualIdentification(id: self.visualIdentification)
     }
 
     // MARK: - Constraints
